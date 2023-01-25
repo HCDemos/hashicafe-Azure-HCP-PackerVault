@@ -16,11 +16,43 @@ terraform {
       source  = "hashicorp/random"
       version = "~> 3.4"
     }
+    vault = {
+      source = "hashicorp/vault"
+      version = "3.11.0"
+    }
   }
 }
 
+provider "vault" {
+  # HCP Vault Configuration options
+  address = var.vault_address
+  namespace = var.vault_namespace
+  auth_login {
+    path = "auth/userpass/login/${var.login_username}"
+    namespace = var.vault_namespace
+    
+    parameters = {
+      password = var.login_password
+    }
+  }
+}
+
+# Configure AzureRM provider to use dynamically generate credentials from Vault
 provider "azurerm" {
   features {}
+  client_id     = data.vault_azure_access_credentials.azure_creds.client_id
+  client_secret = data.vault_azure_access_credentials.azure_creds.client_secret
+  subscription_id = var.subscription_id
+  tenant_id = var.tenant_id
+}
+
+data "vault_azure_access_credentials" "azure_creds" {
+  role                        = "edu-app"
+  validate_creds              = true
+  num_sequential_successes    = 2
+  num_seconds_between_tests   = 3
+  max_cred_validation_seconds = 1200 // 20 minutes
+  backend                     = "azure"
 }
 
 data "hcp_packer_image" "ubuntu-webserver" {
