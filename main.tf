@@ -72,31 +72,31 @@ locals {
   }
 }
 
-resource "azurerm_resource_group" "hashicafe" {
-  name     = "${var.prefix}-hashicafe-webapp"
-  location = var.location
-
-  tags = local.tags
-}
+#resource "azurerm_resource_group" "hashicafe" {
+#  name     = "${var.prefix}-hashicafe-webapp"
+#  location = var.location
+#
+#  tags = local.tags
+#}
 
 resource "azurerm_virtual_network" "hashicafe" {
   name                = "${var.prefix}-vnet"
-  location            = azurerm_resource_group.hashicafe.location
+  location            = var.location
   address_space       = [var.address_space]
-  resource_group_name = azurerm_resource_group.hashicafe.name
+  resource_group_name = var.azurerm_resource_group_name
 }
 
 resource "azurerm_subnet" "hashicafe" {
   name                 = "${var.prefix}-subnet"
   virtual_network_name = azurerm_virtual_network.hashicafe.name
-  resource_group_name  = azurerm_resource_group.hashicafe.name
+  resource_group_name  = var.azurerm_resource_group_name
   address_prefixes     = [var.subnet_prefix]
 }
 
 resource "azurerm_network_security_group" "hashicafe" {
   name                = "${var.prefix}-sg"
   location            = var.location
-  resource_group_name = azurerm_resource_group.hashicafe.name
+  resource_group_name = var.azurerm_resource_group_name
 
   security_rule {
     name                       = "HTTP"
@@ -138,7 +138,7 @@ resource "azurerm_network_security_group" "hashicafe" {
 resource "azurerm_network_interface" "hashicafe" {
   name                = "${var.prefix}-nic"
   location            = var.location
-  resource_group_name = azurerm_resource_group.hashicafe.name
+  resource_group_name = var.azurerm_resource_group_name
 
   ip_configuration {
     name                          = "${var.prefix}ipconfig"
@@ -156,7 +156,7 @@ resource "azurerm_network_interface_security_group_association" "hashicafe" {
 resource "azurerm_public_ip" "hashicafe" {
   name                = "${var.prefix}-ip"
   location            = var.location
-  resource_group_name = azurerm_resource_group.hashicafe.name
+  resource_group_name = var.azurerm_resource_group_name
   allocation_method   = "Dynamic"
   domain_name_label   = "${var.prefix}-app"
 }
@@ -164,7 +164,7 @@ resource "azurerm_public_ip" "hashicafe" {
 resource "azurerm_linux_virtual_machine" "hashicafe" {
   name                = "${var.prefix}-hashicafe-webapp"
   location            = var.location
-  resource_group_name = azurerm_resource_group.hashicafe.name
+  resource_group_name = var.azurerm_resource_group_name
   size                = var.vm_size
 
   network_interface_ids = [azurerm_network_interface.hashicafe.id]
