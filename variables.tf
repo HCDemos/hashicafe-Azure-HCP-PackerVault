@@ -105,7 +105,7 @@ variable "azure_subscription_id" {
     description = "subscription id associated with created resources"
 }
 
-variable "azure_resource_group_name" {
+variable "azurerm_resource_group_name" {
     description = "the resource group name - this is tied to the Vault dynamic Az creds"
     default = "vault-dynamic-dpeacock"
 }
