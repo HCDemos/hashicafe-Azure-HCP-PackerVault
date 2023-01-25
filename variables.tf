@@ -81,6 +81,10 @@ variable "login_password" {
     description = "vault auth password"
 }
 
+variable "vault_address" {
+    description = "url to use to access vault"
+  }
+
 variable "hashi_products" {
   type = list(object({
     name       = string
