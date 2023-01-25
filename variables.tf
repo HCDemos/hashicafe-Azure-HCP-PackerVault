@@ -68,6 +68,19 @@ variable "admin_password" {
   default     = "Password123!"
 }
 
+variable "vault_namespace" {
+    description = "namespace to use"
+    default = "/admin"
+}
+
+variable "login_username" {
+    description = "vault auth username"
+}
+
+variable "login_password" {
+    description = "vault auth password"
+}
+
 variable "hashi_products" {
   type = list(object({
     name       = string
