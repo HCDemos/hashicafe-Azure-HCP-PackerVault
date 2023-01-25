@@ -85,6 +85,26 @@ variable "vault_address" {
     description = "url to use to access vault"
   }
 
+variable "subscription_id" {
+    description = "az sub id"
+}
+
+variable "tenant_id" {
+    description = "az tenant id"
+}
+
+variable "az-vm-adminuser" {
+    description = "admin user id"
+}
+
+variable "az-vm-adminpassword" {
+    description = "admin user password"
+}
+
+variable "azure_subscription_id" {
+    description = "subscription id associated with created resources"
+}
+
 variable "hashi_products" {
   type = list(object({
     name       = string
