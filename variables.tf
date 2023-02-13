@@ -55,12 +55,12 @@ variable "packer_channel" {
   default     = "development"
 }
 
-variable "admin_username" {
+variable "az-vm-adminuser" {
   type        = string
   description = "Administrator user name for OS."
 }
 
-variable "admin_password" {
+variable "az-vm-adminpassword" {
   type        = string
   sensitive   = true
   description = "Administrator password for OS."
