@@ -58,19 +58,16 @@ variable "packer_channel" {
 variable "admin_username" {
   type        = string
   description = "Administrator user name for OS."
-  default     = "hashicorp"
 }
 
 variable "admin_password" {
   type        = string
   sensitive   = true
   description = "Administrator password for OS."
-  default     = "Password123!"
 }
 
 variable "vault_namespace" {
     description = "namespace to use"
-    default = "/admin"
 }
 
 variable "login_username" {
@@ -107,7 +104,6 @@ variable "azure_subscription_id" {
 
 variable "azurerm_resource_group_name" {
     description = "the resource group name - this is tied to the Vault dynamic Az creds"
-    default = "vault-dynamic-dpeacock"
 }
 
 variable "hashi_products" {
