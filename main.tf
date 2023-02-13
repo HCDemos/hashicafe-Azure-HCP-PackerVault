@@ -209,8 +209,8 @@ resource "null_resource" "configure-web-app" {
 
   connection {
     type     = "ssh"
-    user     = var.admin_username
-    password = var.admin_password
+    user     = var.az-vm-adminuser
+    password = var.az-vm-adminpassword
     host     = azurerm_public_ip.hashicafe.fqdn
   }
 
