@@ -217,7 +217,7 @@ resource "null_resource" "configure-web-app" {
   provisioner "remote-exec" {
     inline = [
       "sudo mkdir /var/www/html/img",
-      "sudo chown -R ${var.admin_username} /var/www/html"
+      "sudo chown -R ${var.az-vm-adminuser} /var/www/html"
     ]
   }
 
