@@ -178,8 +178,8 @@ resource "azurerm_linux_virtual_machine" "hashicafe" {
   }
 
   computer_name  = var.prefix
-  admin_username = var.admin_username
-  admin_password = var.admin_password
+  admin_username = var.az-vm-adminuser
+  admin_password = var.az-vm-adminpassword
 
   disable_password_authentication = false
 
