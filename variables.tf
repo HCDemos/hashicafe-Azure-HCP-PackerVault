@@ -55,17 +55,6 @@ variable "packer_channel" {
   default     = "development"
 }
 
-variable "az-vm-adminuser" {
-  type        = string
-  description = "Administrator user name for OS."
-}
-
-variable "az-vm-adminpassword" {
-  type        = string
-  sensitive   = true
-  description = "Administrator password for OS."
-}
-
 variable "vault_namespace" {
     description = "namespace to use"
 }
@@ -84,10 +73,12 @@ variable "vault_address" {
 
 variable "subscription_id" {
     description = "az sub id"
+    sensitive = true
 }
 
 variable "tenant_id" {
     description = "az tenant id"
+    sensitive = true
 }
 
 variable "az-vm-adminuser" {
@@ -96,10 +87,12 @@ variable "az-vm-adminuser" {
 
 variable "az-vm-adminpassword" {
     description = "admin user password"
+    sensitive = true
 }
 
 variable "azure_subscription_id" {
     description = "subscription id associated with created resources"
+    sensitive = true
 }
 
 variable "azurerm_resource_group_name" {
